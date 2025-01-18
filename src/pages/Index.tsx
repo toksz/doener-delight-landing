@@ -1,5 +1,6 @@
 import { Phone, Clock, CreditCard, Truck, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { MenuItem } from "@/components/MenuItem";
 
 const FloatingIcons = () => {
   const icons = [
@@ -32,18 +33,18 @@ const Index = () => {
       <FloatingIcons />
 
       {/* Hero Section */}
-      <header className="relative text-white py-16">
+      <header className="relative text-white py-16 animate-fade-in">
         <div className="container mx-auto px-4 text-center">
           <div className="logo-container mb-8">
             <img 
               src="/lovable-uploads/3e8ea36e-12a2-46b3-ae93-1301787ced78.png"
               alt="Döner-Land Logo"
-              className="h-32 md:h-40 mx-auto"
+              className="h-32 md:h-40 mx-auto hover:scale-105 transition-transform duration-300"
             />
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">Döner-Land</h1>
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 tracking-tight">Döner-Land</h1>
           <p className="text-xl md:text-2xl mb-6">Wetzlar</p>
-          <p className="max-w-2xl mx-auto text-lg">
+          <p className="max-w-2xl mx-auto text-lg leading-relaxed">
             Bei uns genießt Du frisch zubereitete türkische Spezialitäten, 100% halal aus echtem Dönerfleisch. 
             Neben saftigem Döner bieten wir Dir auch Burger, Pizza, Pide und frische Salate!
           </p>
@@ -54,15 +55,15 @@ const Index = () => {
       <div className="py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg hover-scale">
+            <div className="feature-card">
               <CreditCard className="w-12 h-12 text-primary mb-4" />
               <h3 className="font-semibold text-gray-900">Online- oder Barzahlung</h3>
             </div>
-            <div className="flex flex-col items-center text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg hover-scale">
+            <div className="feature-card">
               <Leaf className="w-12 h-12 text-primary mb-4" />
               <h3 className="font-semibold text-gray-900">Frische Zutaten</h3>
             </div>
-            <div className="flex flex-col items-center text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg hover-scale">
+            <div className="feature-card">
               <Truck className="w-12 h-12 text-primary mb-4" />
               <h3 className="font-semibold text-gray-900">Schnelle Lieferung</h3>
             </div>
@@ -71,28 +72,91 @@ const Index = () => {
       </div>
 
       {/* Special Offer */}
-      <div className="bg-secondary/90 backdrop-blur-sm text-white py-4 text-center">
-        <p className="text-xl font-bold">10% Rabatt ab 20€ Bestellwert!</p>
+      <div className="bg-secondary/90 backdrop-blur-sm text-white py-6 transform skew-y-[-2deg] my-8">
+        <div className="transform skew-y-[2deg]">
+          <p className="text-xl md:text-2xl font-bold text-center">
+            10% Rabatt ab 20€ Bestellwert!
+          </p>
+        </div>
       </div>
 
       {/* Menu Sections */}
       <div className="container mx-auto px-4 py-12">
-        <MenuSection title="🥙 DÖNER" items={donerItems} />
-        <MenuSection title="🧆 TELLER GERICHTE" items={tellerItems} />
-        <MenuSection title="🍕 PIZZA" items={pizzaItems} />
-        <MenuSection title="🍔 BURGER" items={burgerItems} />
-        <MenuSection title="🥗 SALAT" items={salatItems} />
-        <MenuSection title="🍟 SNACKS" items={snackItems} />
-        <MenuSection title="🥖 PIDE" items={pideItems} />
-        <MenuSection title="🍮 DESSERT" items={dessertItems} />
-        <MenuSection title="🥤 GETRÄNKE" items={getraenkeItems} />
+        <MenuSection 
+          title="🥙 DÖNER" 
+          items={donerItems.map(item => ({
+            ...item,
+            isPopular: item.name === "Classic Döner" || item.name === "Dürüm Döner + Hatay Spezial",
+            isNew: item.name === "Veggie Döner",
+            allergies: ["Gluten", "Sesam"]
+          }))} 
+        />
+        <MenuSection 
+          title="🧆 TELLER GERICHTE" 
+          items={tellerItems.map(item => ({
+            ...item,
+            isPopular: item.name === "Döner Teller Classic",
+            allergies: ["Gluten"]
+          }))} 
+        />
+        <MenuSection 
+          title="🍕 PIZZA" 
+          items={pizzaItems.map(item => ({
+            ...item,
+            isNew: item.name === "Döneria",
+            allergies: ["Gluten"]
+          }))} 
+        />
+        <MenuSection 
+          title="🍔 BURGER" 
+          items={burgerItems.map(item => ({
+            ...item,
+            isPopular: item.name === "Classic Hamburger",
+            allergies: ["Gluten"]
+          }))} 
+        />
+        <MenuSection 
+          title="🥗 SALAT" 
+          items={salatItems.map(item => ({
+            ...item,
+            allergies: ["Nüsse"]
+          }))} 
+        />
+        <MenuSection 
+          title="🍟 SNACKS" 
+          items={snackItems.map(item => ({
+            ...item,
+            allergies: ["Gluten"]
+          }))} 
+        />
+        <MenuSection 
+          title="🥖 PIDE" 
+          items={pideItems.map(item => ({
+            ...item,
+            allergies: ["Gluten"]
+          }))} 
+        />
+        <MenuSection 
+          title="🍮 DESSERT" 
+          items={dessertItems.map(item => ({
+            ...item,
+            allergies: ["Milch"]
+          }))} 
+        />
+        <MenuSection 
+          title="🥤 GETRÄNKE" 
+          items={getraenkeItems.map(item => ({
+            ...item,
+            allergies: ["Zucker"]
+          }))} 
+        />
       </div>
 
       {/* Contact Section */}
-      <div className="py-12">
+      <div className="py-12 bg-white/5 backdrop-blur-sm">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-8 text-white">Wir liefern auch zu Dir nach Hause!</h2>
-          <div className="max-w-md mx-auto bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-6">
+          <div className="max-w-md mx-auto bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-6 transform hover:scale-[1.02] transition-transform duration-300">
             <Button 
               className="w-full mb-6 text-lg py-6 bg-primary hover:bg-primary/90 button-glow"
               onClick={() => window.location.href = "tel:+49123456789"}
@@ -101,7 +165,7 @@ const Index = () => {
               Direkt anrufen
             </Button>
             
-            <div className="text-left mb-6">
+            <div className="text-left mb-6 space-y-1">
               <p className="font-bold mb-2">Adresse:</p>
               <p>Döner-Land</p>
               <p>Niedergirmeser Weg 24</p>
@@ -110,8 +174,8 @@ const Index = () => {
 
             <div className="text-left">
               <p className="font-bold mb-2">Öffnungszeiten:</p>
-              <div className="flex items-center">
-                <Clock className="mr-2 h-5 w-5 text-primary" />
+              <div className="flex items-center text-primary">
+                <Clock className="mr-2 h-5 w-5" />
                 <p>MO-SO 10:30-22:30</p>
               </div>
             </div>
@@ -128,15 +192,7 @@ const MenuSection = ({ title, items }: { title: string, items: any[] }) => (
     <h2 className="text-2xl font-bold mb-6">{title}</h2>
     <div className="space-y-4">
       {items.map((item, index) => (
-        <div key={index} className="menu-item">
-          <div>
-            <h3 className="menu-item-name">{item.name}</h3>
-            {item.description && (
-              <p className="menu-item-description">{item.description}</p>
-            )}
-          </div>
-          <span className="menu-item-price">{item.price}€</span>
-        </div>
+        <MenuItem key={index} {...item} />
       ))}
     </div>
   </div>
@@ -166,7 +222,7 @@ const pizzaItems = [
   { name: "Margherita", price: "6,50" },
   { name: "Toscana", description: "Salami, Schinken, Peperoniwurst, Zwiebeln & Champignons", price: "8,50" },
   { name: "Döneria", description: "mit Zwiebeln, Jalapeños & Dönerfleisch", price: "9,90" },
-];
+};
 
 const burgerItems = [
   { name: "Classic Hamburger", price: "7,50" },
