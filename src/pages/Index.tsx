@@ -222,7 +222,7 @@ const pizzaItems = [
   { name: "Margherita", price: "6,50" },
   { name: "Toscana", description: "Salami, Schinken, Peperoniwurst, Zwiebeln & Champignons", price: "8,50" },
   { name: "Döneria", description: "mit Zwiebeln, Jalapeños & Dönerfleisch", price: "9,90" },
-};
+];
 
 const burgerItems = [
   { name: "Classic Hamburger", price: "7,50" },
