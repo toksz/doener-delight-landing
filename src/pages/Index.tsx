@@ -1,12 +1,46 @@
 import { Phone, Clock, CreditCard, Truck, Leaf } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+const FloatingIcons = () => {
+  const icons = [
+    "🥙", "🥖", "🥬", "🍅", "🥒", "🧄", "🐄", "🐔", "🌶️", "🧀"
+  ];
+
+  return (
+    <div className="fixed inset-0 overflow-hidden pointer-events-none">
+      {icons.map((icon, index) => (
+        <div
+          key={index}
+          className="floating-icon text-4xl"
+          style={{
+            left: `${Math.random() * 100}%`,
+            top: `${Math.random() * 100}%`,
+            animationDelay: `${Math.random() * 10}s`
+          }}
+        >
+          {icon}
+        </div>
+      ))}
+    </div>
+  );
+};
+
 const Index = () => {
   return (
-    <div className="min-h-screen bg-orange-50">
+    <div className="min-h-screen relative">
+      <div className="gradient-bg" />
+      <FloatingIcons />
+
       {/* Hero Section */}
-      <header className="bg-primary text-white py-16">
+      <header className="relative text-white py-16">
         <div className="container mx-auto px-4 text-center">
+          <div className="logo-container mb-8">
+            <img 
+              src="/lovable-uploads/3e8ea36e-12a2-46b3-ae93-1301787ced78.png"
+              alt="Döner-Land Logo"
+              className="h-32 md:h-40 mx-auto"
+            />
+          </div>
           <h1 className="text-4xl md:text-6xl font-bold mb-4">Döner-Land</h1>
           <p className="text-xl md:text-2xl mb-6">Wetzlar</p>
           <p className="max-w-2xl mx-auto text-lg">
@@ -17,27 +51,27 @@ const Index = () => {
       </header>
 
       {/* Features */}
-      <div className="py-12 bg-white">
+      <div className="py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg hover-scale">
               <CreditCard className="w-12 h-12 text-primary mb-4" />
-              <h3 className="font-semibold">Online- oder Barzahlung</h3>
+              <h3 className="font-semibold text-gray-900">Online- oder Barzahlung</h3>
             </div>
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg hover-scale">
               <Leaf className="w-12 h-12 text-primary mb-4" />
-              <h3 className="font-semibold">Frische Zutaten</h3>
+              <h3 className="font-semibold text-gray-900">Frische Zutaten</h3>
             </div>
-            <div className="flex flex-col items-center text-center">
+            <div className="flex flex-col items-center text-center bg-white/90 backdrop-blur-sm p-6 rounded-lg hover-scale">
               <Truck className="w-12 h-12 text-primary mb-4" />
-              <h3 className="font-semibold">Schnelle Lieferung</h3>
+              <h3 className="font-semibold text-gray-900">Schnelle Lieferung</h3>
             </div>
           </div>
         </div>
       </div>
 
       {/* Special Offer */}
-      <div className="bg-secondary text-white py-4 text-center">
+      <div className="bg-secondary/90 backdrop-blur-sm text-white py-4 text-center">
         <p className="text-xl font-bold">10% Rabatt ab 20€ Bestellwert!</p>
       </div>
 
@@ -55,12 +89,12 @@ const Index = () => {
       </div>
 
       {/* Contact Section */}
-      <div className="bg-gray-100 py-12">
+      <div className="py-12">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Wir liefern auch zu Dir nach Hause!</h2>
-          <div className="max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+          <h2 className="text-3xl font-bold mb-8 text-white">Wir liefern auch zu Dir nach Hause!</h2>
+          <div className="max-w-md mx-auto bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-6">
             <Button 
-              className="w-full mb-6 text-lg py-6 bg-primary hover:bg-primary/90"
+              className="w-full mb-6 text-lg py-6 bg-primary hover:bg-primary/90 button-glow"
               onClick={() => window.location.href = "tel:+49123456789"}
             >
               <Phone className="mr-2 h-5 w-5" />
